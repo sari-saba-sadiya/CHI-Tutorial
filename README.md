@@ -1,6 +1,6 @@
-# [The Problem with Archives: A Portrait Is Worth Our Words](https://sebastian-bn-zaydan.github.io/Portrait-Worth-Our-Words/)
+# Tutorial for CHI fellows
 
-This website is for the MFA Thesis work of Lillian Young. 
+Using Inspect Element, Console, and Debugger in Javascript based websites. 
 
 ## Acknowledgment:
 

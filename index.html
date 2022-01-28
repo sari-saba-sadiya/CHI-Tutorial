@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Portrait Worth Our Words</title>
+        <style>
+        #map {
+            width: 1401px;
+            height: 463px;
+        }
+        </style>
+        <!---- MAP STUFF -->
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+		<!-- Load d3.js -->
+		<script src="https://d3js.org/d3.v4.js"></script>
+		<!-- Function for radial charts -->
+		<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
+
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="assets/css/landing-page.css" rel="stylesheet"/>
+
+        <!--     Fonts and icons
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/v4-shims.css">
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
+        <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    </head>
+    <body class="landing-page landing-page2">
+        <nav class="navbar navbar-transparent navbar-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display
+                <div class="navbar-header">
+                    <button id="menu-toggle" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar bar1"></span>
+                    <span class="icon-bar bar2"></span>
+                    <span class="icon-bar bar3"></span>
+                    </button>
+                    <a href="http://www.creative-tim.com">
+                        <div class="logo-container">
+                            <div class="logo">
+                                <img src="assets/img/new_logo.png" alt="Creative Tim Logo">
+                            </div>
+                            <div class="brand">
+                                Creative Tim
+                            </div>
+                        </div>
+                    </a>
+                </div>-->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="example" >
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="https://lillartlife.org/">
+                            <i class="fas fa-paint-brush"></i>
+                            Lillian Young
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/canuseeher/">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/lillife_and_art/">
+                            <i class="fa fa-instagram"></i>
+                            Instagram
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+        </nav>
+        <div class="wrapper">
+            <div class="parallax filter-gradient paper" data-color="blue">
+                <div class= "container">
+                    <div class="row">
+                        <div class="col-md-5  hidden-xs">
+                            <div class="parallax-image">
+                                <img src="assets/images/LillianYoung.png"/>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="description text-center">
+                                <h2>The Problem with Archives: A Portrait is Worth Our Words</h2>
+                                <br>
+                                <h5> Runaway Slave Posters as an Artistic and Historic Artifact</h5>
+                                <div class="buttons">
+                                    <a href="http://www.creative-tim.com/product/awesome-landing-page" class="btn btn-fill btn-neutral">
+                                    <i class="fa fa-download"></i> Thesis
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-gray section-clients">
+                <div class="container text-center">
+                    <h4 class="header-text">A Summary</h4>
+                    <p>
+                        A Portrait is Worth Our Words focuses on rehumanizing Enslaved Black people whose stories will never be fully known and providing a platform for the ordinary Black elders, who lived through Jim Crow and defacto Segregation, to share their personal experiences of that time.<br>
+                    </p>
+                    <p> The Runaways portraits featured 100 portraits of Freedom Seekers based off of the vague and racist descriptions provided by Enslavers and Jailers in newspapers ads the 1700s to mid 1800s.</p>
+                </div>
+            </div>
+            <!-- Sari: This is where the map would be -->
+            <div class="section section-presentation">
+                <div class="container">
+                    <div class="row">
+						<div id="map" style="margin-left: auto; margin-right: auto;"></div>
+								<!---- MAP STUFF -->
+						        <script src="js/qgis2web_expressions.js"></script>
+								<script src="js/leaflet.js"></script>
+								<script src="js/leaflet.rotatedMarker.js"></script>
+								<script src="js/leaflet.pattern.js"></script>
+								<script src="js/leaflet-hash.js"></script>
+								<script src="js/Autolinker.min.js"></script>
+								<script src="js/rbush.min.js"></script>
+								<script src="js/labelgun.min.js"></script>
+								<script src="js/labels.js"></script>
+								<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+								<script>
+								var map = L.map('map', {
+									zoomControl:true, maxZoom:28, minZoom:1
+								}).fitBounds([[42.7096403224063,-84.52306572661463],[42.73586213771844,-84.41474741596215]]);
+
+								var url = 'data1.geojson';  // my GeoJSON data source, in the same folder as my HTML file.
+								var  geojsonMarkerOptions = {
+									color: 'red',
+									fillColor: '#f03',
+									fillOpacity: 0.5,
+									radius: 500
+								};
+
+								function forEachFeature(feature, layer) {
+										var popupContent = "<h3>The " + feature.properties.NAME + "<br></h3>";
+										<!-- Tutorial:console.log(feature.properties.NAME); -->
+										if (feature.properties && feature.properties.COMMENT) {
+											popupContent += feature.properties.COMMENT;
+										}
+										layer.bindPopup(popupContent);
+								};
+								var bbTeam = L.geoJSON(null, {
+										onEachFeature: forEachFeature,
+										pointToLayer: function (feature, latlng) {
+											<!-- Tutorial: console.log(latlng); -->
+											return L.marker(latlng, geojsonMarkerOptions);
+										}
+								});
+								$.getJSON(url, function(data) {
+										bbTeam.addData(data);
+								});
+								bbTeam.addTo(map);
+
+								var hash = new L.Hash(map);
+								map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+								var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+								var bounds_group = new L.featureGroup([]);
+								function setBounds() {
+								}
+								map.createPane('pane_msuCampus_modified_0');
+								map.getPane('pane_msuCampus_modified_0').style.zIndex = 400;
+								var img_msuCampus_modified_0 = 'data/msuCampus_modified_0.png';
+								var img_bounds_msuCampus_modified_0 = [[42.7102501022548,-84.50617898360841],[42.73586001441825,-84.46099282572754]];
+								var layer_msuCampus_modified_0 = new L.imageOverlay(img_msuCampus_modified_0,
+																	  img_bounds_msuCampus_modified_0,
+																	  {pane: 'pane_msuCampus_modified_0'});
+								bounds_group.addLayer(layer_msuCampus_modified_0);
+								map.addLayer(layer_msuCampus_modified_0);
+								setBounds();
+								L.ImageOverlay.include({
+									getBounds: function () {
+										return this._bounds;
+									}
+								});
+								</script>
+								<!---- MAP STUFF END-->
+					</div>
+				</div>
+			</div>
+            <div class="section section-presentation">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5 hidden-xs">
+                            <div class="description">
+                                <h4 class="header-text">The Map</h4>
+                                <p>This pack is a demo of our latest product. You can download it and use it in any project of yours. By downloading the resource with a Personal License you are granted the use of it under the conditions featured in the above table. Ownership stays with Creative Tim, along with the copyright holders and you must abide the following rights and restrictions. </p>
+                                <p>Locations:
+                                <p>
+                                <ol>
+                                    <li> <strong> Eli and Edythe Broad Art Museum at MSU </strong>: Second Floor Gallery </li>
+                                    <li> <strong> Residential College in the Arts and Humanities (RCAH) </strong>: Second floor display showcases</li>
+                                    <li>You are not required to attribute or link to <a href="http://www.creative-tim.com">Creative Tim</a> in project.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <img src="assets/img/web_app.jpg" style="margin-top:-50px"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-demo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="demo-image">
+                                <img src="assets/img/FOTM home page.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <h4 class="header-text">The Source</h4>
+                            <p>
+                                For this project all of the runaway notices features are from the <a href="https://freedomonthemove.org/">Freedom On the Move</a> Database, a collaborative project between universities in the United States.
+                            </p>
+                            <p>
+                                PSD Custom focuses on conveying the attention of your users to the important parts of the page and the actions. While keeping a light feel, the colors give the page an extra push.
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="header-text">The Importance</h4>
+                            <p>
+                                Each color has a strong pigment and was chosen to make your design shine. Each component from our product can have one of these colors. Try on different combinations and be sure that everything works together.
+                            </p>
+                            <p>
+                                PSD Custom focuses on conveying the attention of your users to the important parts of the page and the actions. While keeping a light feel, the colors give the page an extra push.
+                            </p>
+                        </div>
+                        <div class="col-md-6 col-md-offset-1">
+                            <div class="demo-image">
+                                <img src="assets/img/showcases/showcase-2/examples/home_6.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-features">
+                <div class="container">
+                    <h4 class="header-text text-center">Descriptors</h4>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-blue">
+                                <div class="icon">
+                                    <i class="pe-7s-pen"></i>
+                                </div>
+                                <div class="text">
+                                    <h4>A Negro</h4>
+                                    <p>A person of Black African ancerstory.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-blue">
+                                <div class="icon">
+                                    <i class="pe-7s-look"></i>
+                                </div>
+                                <h4>Mulatto</h4>
+                                <p>The child of a European and a Black.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-blue">
+                                <div class="icon">
+                                    <i class="pe-7s-like"></i>
+                                </div>
+                                <h4>Griff</h4>
+                                <p>Indicates lighter skin color or mixed ancerstory.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-blue">
+                                <div class="icon">
+                                    <i class="pe-7s-piggy"></i>
+                                </div>
+                                <h4>Quadroon</h4>
+                                <p>A person who is one quarter blacck by descent; One Black grandparent, child of a mulatto and a white person.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Create a div where the graph will take place -->
+			<div id="my_dataviz" class="section section-gray section-clients text-center"></div>
+            <div class="section section-testimonial">
+                <div class="container">
+                    <h4 class="header-text text-center">Featured Ads</h4>
+                    <div id="carousel-example-generic" class="carousel fade" data-ride="carousel">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item">
+                                <div class="mask">§
+                                    <img src="assets/img/faces/face-4.jpg">
+                                </div>
+                                <div class="carousel-testimonial-caption">
+                                    <p> Fanny (35 to 40), 1844</p>
+                                    <h3> <em>". . .with eyes of a reddish complexion, produced by drinking."</em> </h3>
+                                </div>
+                            </div>
+                            <div class="item active">
+                                <div class="mask">
+                                    <img src="assets/img/faces/face-3.jpg">
+                                </div>
+                                <div class="carousel-testimonial-caption">
+                                    <p>Jake (9 to 10), 1788</p>
+                                    <h3> <em> ". . . of a very black complexion, and a remarkable large haninging under lip." </em> </h3>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="mask">
+                                    <img src="assets/img/faces/face-2.jpg">
+                                </div>
+                                <div class="carousel-testimonial-caption">
+                                    <p>Daniel, 1859</p>
+                                    <h3> <em> "He has an unmistakable mark, having several years since attempted to cut his throat." </em> </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <ol class="carousel-indicators carousel-indicators-blue">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-no-padding">
+                <div class="parallax filter-gradient blue" data-color="blue">
+                    <div class="parallax-background">
+                        <img class ="parallax-background-image" src="assets/img/showcases/showcase-2/bg2.jpg">
+                    </div>
+                    <div class="info">
+                        <h1>Special Thanks</h1>
+                        <p>Beautiful multipurpose bootstrap landing page.</p>
+                        <a href="http://www.creative-tim.com/product/awesome-landing-page" class="btn btn-neutral btn-lg btn-fill">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://freedomonthemove.org/">
+                                Database
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://lillartlife.org/">
+                                Portfolio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/lillife_and_art/">
+                                Instagram
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="social-area pull-right">
+                        <a class="btn btn-social btn-facebook btn-simple">
+                        <i class="fa fa-facebook-square"></i>
+                        </a>
+                        <a class="btn btn-social btn-twitter btn-simple">
+                        <i class="fa fa-twitter"></i>
+                        </a>
+                        <a class="btn btn-social btn-pinterest btn-simple">
+                        <i class="fa fa-pinterest"></i>
+                        </a>
+                    </div>
+                    <div class="copyright">
+                        &copy; 2016 <a href="http://www.creative-tim.com">Creative Tim</a>, made with love
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!--
+        <div class="fixed-plugin">
+
+            <div class="dropdown open">
+                <a href="#" data-toggle="dropdown">
+                <i class="fa fa-cog fa-2x"> </i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header-title">Adjustments</li>
+                    <li class="adjustments-line">
+                        <a href="javascript:void(0)" class="switch-trigger">
+                            <p class="pull-right">Filter</p>
+                            <div class="pull-left">
+                                <span class="badge selector badge-blue active" data-color="blue" data-button="info"></span>
+                                <span class="badge selector badge-green" data-color="green" data-button="success"></span>
+                                <span class="badge selector badge-orange" data-color="orange" data-button="warning"></span>
+                                <span class="badge selector badge-red" data-color="red" data-button="danger"></span>
+                                <span class="badge selector badge-black" data-color="gray" data-button="default"></span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li>
+                    <li class="header-title">Template</li>
+                    <li class="">
+                        <a href="index.html" class="switch">
+                            <img alt="..." src="assets/img/blue.jpg">
+                            <p class="pull-left">Awesome Landing Page</p>
+                        </a>
+                    </li>
+                    <li class="header-title">Showcases</li>
+                    <li class="">
+                        <a href="phone_app.html" class="switch">
+                            <img alt="..." src="assets/img/phone_app.jpg">
+                            <p class="pull-left">Showcase 1</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="web_app.html" class="switch">
+                            <img alt="..." src="assets/img/web_app.jpg">
+                            <p class="pull-left">Showcase 2</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+		-->
+		
+	<script>
+		// set the dimensions and margins of the graph
+		var margin = {top: 20, right: 0, bottom: 0, left: 50},
+			width = 420 - margin.left - margin.right,
+			height = 500 - margin.top - margin.bottom,
+			innerRadius = 30,
+			outerRadius = Math.min(width, height) / 3;   // the outerRadius goes from the middle of the SVG area to the border
+
+		// append the svg object
+		var peopleSvg = d3.select("#my_dataviz")
+		  .append("svg")
+			.attr("width", width + margin.left + margin.right)
+			.attr("height", height + margin.top + margin.bottom)
+		  .append("g")
+			.attr("transform", "translate(" + (width / 2 + margin.left) + "," + (height / 2 + margin.top) + ")");
+
+		d3.csv("./data/Institutions.csv", function(data) {
+		  // Scales
+		  var x = d3.scaleBand()
+			  .range([0, 2 * Math.PI])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
+			  .align(0)                  // This does nothing
+			  .domain(data.map(function(d) { return d.Institution; })); // The domain of the X axis is the list of states.
+		  var y = d3.scale.radial()
+			  .range([innerRadius, outerRadius])   // Domain will be define later.
+			  .domain([0, 13]); // Domain of Y is from 0 to the max seen in the data
+
+		  // Add the bars
+		  peopleSvg.append("g")
+			.selectAll("path")
+			.data(data)
+			.enter()
+			.append("path")
+			  .attr("fill", "#dc2426")
+			  .attr("d", d3.arc()     // imagine your doing a part of a donut plot
+				  .innerRadius(innerRadius)
+				  .outerRadius(function(d) { return y(d['Value']); })
+				  .startAngle(function(d) { return x(d.Institution); })
+				  .endAngle(function(d) { return x(d.Institution) + x.bandwidth(); })
+				  .padAngle(0.01)
+				  .padRadius(innerRadius))
+
+		  // Add the labels
+		  peopleSvg.append("g")
+			  .selectAll("g")
+			  .data(data)
+			  .enter()
+			  .append("g")
+				.attr("text-anchor", function(d) { return (x(d.Institution) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "middle" : "middle"; })
+				.attr("transform", function(d) { return "rotate(" + ((x(d.Institution) + x.bandwidth() / 2) * 180 / Math.PI - 90) + ")"+"translate(" + (y(d['Value'])+10) + ",0)"; })
+			  .append("text")
+				.text(function(d){return(d.Institution)})
+				.attr("transform", function(d) { return ((x(d.Institution) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) >= Math.PI /2 && (x(d.Institution) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) <= Math.PI * 3/2) ? "rotate(90)" : "rotate(270)"; })
+				.style("font-size", "11px")
+				.attr("alignment-baseline", "middle")
+
+		});
+	</script>
+    </body>
+    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap.js" type="text/javascript"></script>
+    <script src="assets/js/awesome-landing-page.js" type="text/javascript"></script>
+</html>
